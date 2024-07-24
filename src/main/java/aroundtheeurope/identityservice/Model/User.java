@@ -1,20 +1,17 @@
 package aroundtheeurope.identityservice.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-
 import java.util.UUID;
 
 @Entity
+@Table(name = "Users")
 public class User {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     @NotBlank
     private String username;
@@ -26,18 +23,13 @@ public class User {
     @NotBlank
     private String email;
 
-    @PrePersist
-    public void generateId() {
-        this.id = UUID.randomUUID().toString();
-    }
-
     // Getters and Setters
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
