@@ -1,9 +1,6 @@
 package aroundtheeurope.identityservice.Controller;
 
-import aroundtheeurope.identityservice.DTO.AuthResponse;
-import aroundtheeurope.identityservice.DTO.LogoutRequest;
-import aroundtheeurope.identityservice.DTO.RefreshTokenRequest;
-import aroundtheeurope.identityservice.DTO.UserRegistrationDto;
+import aroundtheeurope.identityservice.DTO.*;
 import aroundtheeurope.identityservice.Model.User;
 import aroundtheeurope.identityservice.Security.JwtTokenUtil;
 import aroundtheeurope.identityservice.Service.UserService;
@@ -20,12 +17,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/v1/")
 public class UserController {
 
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
     private final JwtTokenUtil jwtTokenUtil;
 
     @Value("${key.auth.lifetime.minutes}")
@@ -38,12 +34,10 @@ public class UserController {
     public UserController(
             AuthenticationManager authenticationManager,
             UserService userService,
-            PasswordEncoder passwordEncoder,
             JwtTokenUtil jwtTokenUtil
     ) {
         this.authenticationManager = authenticationManager;
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
         this.jwtTokenUtil = jwtTokenUtil;
     }
 
@@ -57,7 +51,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> loginUser(@RequestBody User user) {
+    public ResponseEntity<?> loginUser(@RequestBody LogInRequest user) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));

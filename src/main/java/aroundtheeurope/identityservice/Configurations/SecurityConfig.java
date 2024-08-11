@@ -20,8 +20,11 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable) // Disable CSRF protection
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**").permitAll() // Allow all requests
-                        .anyRequest().authenticated()
+                        .requestMatchers(request -> {
+                            String remoteAddr = request.getRemoteAddr();
+                            return "127.0.0.1".equals(remoteAddr) || "::1".equals(remoteAddr);
+                        }).permitAll() // Allow requests from localhost
+                        .anyRequest().denyAll() // Deny all other requests
                 );
         return http.build();
     }

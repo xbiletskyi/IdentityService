@@ -13,8 +13,7 @@ public class EnvPropertyLoader {
      * Loads properties from the .env file and sets them as system properties.
      */
     public static void loadProperties() {
-        Dotenv dotenv = Dotenv
-                .configure()
+        Dotenv.configure()
                 .ignoreIfMissing()
                 .systemProperties()
                 .load();
