@@ -56,8 +56,9 @@ public class UserController {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            String accessToken = jwtTokenUtil.generateToken(userDetails.getUsername(), authKeyLifetime * 60L);
-            String refreshToken = jwtTokenUtil.generateToken(userDetails.getUsername(), refreshKeyLifetime * 60L);
+            User loggedInUser = userService.findByUsername(userDetails.getUsername());
+            String accessToken = jwtTokenUtil.generateToken(loggedInUser.getId().toString(), authKeyLifetime * 60L);
+            String refreshToken = jwtTokenUtil.generateToken(loggedInUser.getId().toString(), refreshKeyLifetime * 60L);
             return ResponseEntity.ok(new AuthResponse(accessToken, refreshToken));
         } catch (AuthenticationException e) {
             return ResponseEntity.badRequest().body("Invalid username or password");

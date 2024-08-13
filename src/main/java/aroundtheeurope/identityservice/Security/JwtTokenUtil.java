@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Component
 public class JwtTokenUtil {
@@ -22,11 +23,11 @@ public class JwtTokenUtil {
 
     private final Set<String> refreshTokenBlacklist = new HashSet<>();
 
-    public String generateToken(String username, long expirationTime) {
+    public String generateToken(String userId, long expirationTime) {
         try {
             JWSSigner signer = new MACSigner(secret.getBytes());
             JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
-                    .subject(username)
+                    .subject(userId)
                     .expirationTime(new Date(new Date().getTime() + expirationTime))
                     .build();
 
@@ -41,7 +42,7 @@ public class JwtTokenUtil {
         }
     }
 
-    public String getUsernameFromToken(String token) {
+    public String getUserIdFromToken(String token) {
         try {
             SignedJWT signedJWT = SignedJWT.parse(token);
             JWTClaimsSet claimsSet = signedJWT.getJWTClaimsSet();
@@ -66,8 +67,8 @@ public class JwtTokenUtil {
 
     public AuthResponse refreshToken(String refreshToken, long expiration) {
         if (validateRefreshToken(refreshToken)) {
-            String username = getUsernameFromToken(refreshToken);
-            String newAccessToken = generateToken(username, expiration);
+            String userId = getUserIdFromToken(refreshToken);
+            String newAccessToken = generateToken(userId, expiration);
             return new AuthResponse(newAccessToken, refreshToken);
         } else {
             return null;
