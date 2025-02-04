@@ -1,12 +1,18 @@
-package aroundtheeurope.identityservice.model.DTO;
+package aroundtheeurope.identityservice.model.dto;
 
 public class AuthResponse {
     private String accessToken;
     private String refreshToken;
+    private String avatarUrl;
 
-    public AuthResponse(String accessToken, String refreshToken) {
+    public AuthResponse(
+            String accessToken,
+            String refreshToken,
+            String avatarUrl
+    ) {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
+        this.avatarUrl = avatarUrl;
     }
 
     public String getAccessToken() {
@@ -23,5 +29,13 @@ public class AuthResponse {
 
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }

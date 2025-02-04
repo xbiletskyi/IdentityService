@@ -1,6 +1,8 @@
-package aroundtheeurope.identityservice.Security;
+package aroundtheeurope.identityservice.security;
 
-import aroundtheeurope.identityservice.DTO.AuthResponse;
+import aroundtheeurope.identityservice.model.dto.AuthResponse;
+import aroundtheeurope.identityservice.model.dto.RefreshRequest;
+import aroundtheeurope.identityservice.model.dto.RefreshResponse;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
@@ -13,7 +15,6 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Component
 public class JwtTokenUtil {
@@ -65,11 +66,11 @@ public class JwtTokenUtil {
         }
     }
 
-    public AuthResponse refreshToken(String refreshToken, long expiration) {
+    public RefreshResponse refreshToken(String refreshToken, long expiration) {
         if (validateRefreshToken(refreshToken)) {
             String userId = getUserIdFromToken(refreshToken);
             String newAccessToken = generateToken(userId, expiration);
-            return new AuthResponse(newAccessToken, refreshToken);
+            return new RefreshResponse(newAccessToken, refreshToken);
         } else {
             return null;
         }

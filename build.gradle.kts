@@ -32,6 +32,8 @@ dependencies {
     implementation("io.github.cdimascio:dotenv-java:3.0.0")
     // Jackson for JSON processing
     implementation("com.fasterxml.jackson.core:jackson-databind:2.14.0")
+    // Azure Blob
+    implementation("com.azure:azure-storage-blob:12.27.0")
 }
 
 tasks.withType<Test> {

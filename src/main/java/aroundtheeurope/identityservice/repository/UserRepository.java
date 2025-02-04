@@ -1,6 +1,6 @@
-package aroundtheeurope.identityservice.Repository;
+package aroundtheeurope.identityservice.repository;
 
-import aroundtheeurope.identityservice.Model.User;
+import aroundtheeurope.identityservice.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

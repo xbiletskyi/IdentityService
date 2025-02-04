@@ -3,7 +3,7 @@ package aroundtheeurope.identityservice.model.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-public class UserRegistrationDto {
+public class RegistrationRequest {
 
     @NotBlank
     private String username;
@@ -15,7 +15,10 @@ public class UserRegistrationDto {
     @NotBlank
     private String email;
 
+    private String fullName;
+
     // Getters and Setters
+
     public String getUsername() {
         return username;
     }
@@ -38,5 +41,13 @@ public class UserRegistrationDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 }

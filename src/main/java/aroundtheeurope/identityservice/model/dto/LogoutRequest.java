@@ -1,4 +1,4 @@
-package aroundtheeurope.identityservice.model.DTO;
+package aroundtheeurope.identityservice.model.dto;
 
 public class LogoutRequest {
 

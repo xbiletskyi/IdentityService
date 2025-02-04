@@ -1,11 +1,11 @@
 package aroundtheeurope.identityservice.model.dto;
 
-public class RefreshTokenRequest {
+public class RefreshRequest {
 
     private String refreshToken;
     private long expiration;
 
-    public RefreshTokenRequest(
+    public RefreshRequest(
             String refreshToken,
             long expiration
     ) {
