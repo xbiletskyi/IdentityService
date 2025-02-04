@@ -1,4 +1,4 @@
-package aroundtheeurope.identityservice.Model;
+package aroundtheeurope.identityservice.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

@@ -1,4 +1,4 @@
-package aroundtheeurope.identityservice.DTO;
+package aroundtheeurope.identityservice.model.DTO;
 
 public class AuthResponse {
     private String accessToken;

@@ -1,4 +1,4 @@
-package aroundtheeurope.identityservice.DTO;
+package aroundtheeurope.identityservice.model.dto;
 
 public class RefreshTokenRequest {
 
